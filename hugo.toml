@@ -23,3 +23,7 @@ weight = 2
 name = "关于"
 url = "/about/"
 weight = 3
+
+[params]
+  # 设置摘要最大长度（字符数）
+  summaryLength = 200
