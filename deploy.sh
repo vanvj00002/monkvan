@@ -1,58 +1,34 @@
 #!/bin/bash
 
-# Hugo 博客部署脚本到 GitHub Pages
-# 使用方式: bash deploy.sh "提交消息"
-
 set -e
 
-# 设置变量
 REPO_DIR="/Users/vanvj/my-blog"
-BRANCH="gh-pages"
-COMMIT_MSG="${1:-Update site on $(date +'%Y-%m-%d %H:%M:%S')}"
+COMMIT_MSG="${1:-deploy: $(date '+%Y-%m-%d %H:%M:%S')}"
 
-echo "🚀 开始部署 Hugo 博客到 GitHub Pages..."
+echo "=========================================="
+echo "开始部署博客到 GitHub"
+echo "=========================================="
 
-# 进入项目目录
 cd "$REPO_DIR"
 
-# 清理旧的 public 目录
-echo "🧹 清理旧的编译文件..."
-rm -rf public
+# Clean build
+echo "[1/4] 清理旧构建..."
+rm -rf public resources/_gen
 
-# 编译 Hugo
-echo "🔨 编译 Hugo..."
-hugo
+# Build
+echo "[2/4] 构建博客..."
+hugo --minify
 
-# 进入 public 目录
-cd public
-
-# 初始化 git（如果还没有的话）
-if [ ! -d .git ]; then
-    echo "📦 初始化 git 仓库..."
-    git init
-    git remote add origin https://github.com/vanvj00002/monkvan.git
-fi
-
-# 配置 git 用户信息（如果需要）
-git config user.email "you@example.com" || git config --global user.email "you@example.com"
-git config user.name "Your Name" || git config --global user.name "Your Name"
-
-# 添加所有文件
-echo "📝 添加文件到 git..."
+# Add changes
+echo "[3/4] 提交更改..."
 git add -A
+git commit -m "$COMMIT_MSG" || echo "没有更改需要提交"
 
-# 检查是否有变化
-if git diff --cached --quiet; then
-    echo "✅ 没有文件变化，部署已完成"
-else
-    # 提交
-    echo "💾 提交更改..."
-    git commit -m "$COMMIT_MSG"
-    
-    # 推送到 gh-pages 分支
-    echo "🌐 推送到 GitHub..."
-    git push -u origin main:gh-pages
-    
-    echo "✨ 部署完成！"
-    echo "📍 你的博客地址: https://vanvj00002.github.io/monkvan"
-fi
+# Push
+echo "[4/4] 推送到 GitHub..."
+git push origin main
+
+echo "=========================================="
+echo "部署完成！"
+echo "博客地址: https://vanvj00002.github.io/monkvan"
+echo "=========================================="
