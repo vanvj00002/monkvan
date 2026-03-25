@@ -1,6 +1,6 @@
-baseURL = 'https://vanvj00001.github.io/my-blog/'
+baseURL = 'https://vanvj00002.github.io/monkvan/'
 languageCode = 'zh-cn'
-title = '老梵的随笔空间'
+title = 'monkvan'
 theme = 'ananke'
 
 [params]
