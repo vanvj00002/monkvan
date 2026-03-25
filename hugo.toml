@@ -5,7 +5,6 @@ theme = ["fixit"]
 
 defaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
-mainSections = ["posts"]
 enableEmoji = true
 enableRobotsTXT = true
 enableGitInfo = true
@@ -15,31 +14,11 @@ enableGitInfo = true
   since = 2025
   description = "老梵的个人随笔和思考"
   
-  [params.author]
-    name = "老梵"
-  
   [params.home]
     sort = "date"
     paginate = 12
     dateFormat = "2006-01-02"
     readMore = true
-    
-
-  
-  [params.page]
-    hiddenFromHomePage = false
-    enableToC = true
-    enableLastmod = true
-    
-  [params.archives]
-    dateFormat = "01-02"
-    
-  [params.search]
-    enable = true
-    type = "fuse"
-    placeholder = "搜索..."
-    maxResultLength = 20
-    contentLength = 5000
 
 [menu]
   [[menu.main]]
@@ -58,12 +37,7 @@ enableGitInfo = true
     url = "/index/"
     weight = 3
   [[menu.main]]
-    identifier = "search"
-    name = "搜索"
-    url = "/search/"
-    weight = 4
-  [[menu.main]]
     identifier = "about"
     name = "关于"
     url = "/about/"
-    weight = 5
+    weight = 4
