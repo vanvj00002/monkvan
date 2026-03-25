@@ -19,14 +19,19 @@ rm -rf public resources/_gen
 echo "[2/4] 构建博客..."
 hugo --minify
 
-# Add changes
-echo "[3/4] 提交更改..."
+# Deploy to gh-pages branch
+echo "[3/4] 部署到 gh-pages..."
+cd public
+
+# Init git in public folder if needed
+if [ ! -d .git ]; then
+    git init
+    git remote add origin https://github.com/vanvj00002/monkvan.git
+fi
+
 git add -A
 git commit -m "$COMMIT_MSG" || echo "没有更改需要提交"
-
-# Push
-echo "[4/4] 推送到 GitHub..."
-git push origin main
+git push origin gh-pages --force
 
 echo "=========================================="
 echo "部署完成！"

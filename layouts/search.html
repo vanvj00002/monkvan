@@ -1,0 +1,95 @@
+{{- define "title" -}}
+  {{- .Title -}}
+{{- end -}}
+
+{{- define "content" -}}
+<article class="page single special search">
+  <div class="header">
+    <h1 class="single-title">{{ .Title }}</h1>
+  </div>
+  
+  <div class="content" id="content">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off">
+    </div>
+    
+    <div id="searchResults" class="search-results"></div>
+    
+    <script>
+      const searchData = [
+        {{- range where .Site.RegularPages "Section" "in" .Site.MainSections -}}
+        {
+          title: {{ .Title | jsonify }},
+          content: {{ .Plain | jsonify }},
+          permalink: {{ .RelPermalink | jsonify }},
+          tags: {{ .Params.tags | jsonify }},
+          description: {{ .Description | jsonify }},
+          date: {{ .Date.Format "2006-01-02" | jsonify }}
+        }{{- end -}}
+      ];
+      
+      document.getElementById('searchInput').addEventListener('input', function(e) {
+        const query = e.target.value.trim().toLowerCase();
+        const resultsContainer = document.getElementById('searchResults');
+        
+        if (!query) {
+          resultsContainer.innerHTML = '';
+          return;
+        }
+        
+        const results = searchData.filter(item => {
+          return item.title.toLowerCase().includes(query) ||
+                 (item.content && item.content.toLowerCase().includes(query)) ||
+                 (item.tags && item.tags.some(t => t.toLowerCase().includes(query)));
+        }).slice(0, 20);
+        
+        if (results.length === 0) {
+          resultsContainer.innerHTML = '<p class="no-results">没有找到相关内容</p>';
+          return;
+        }
+        
+        let html = '<ul class="search-result-list">';
+        results.forEach(item => {
+          html += '<li class="search-result-item">';
+          html += '<a href="' + item.permalink + '">';
+          html += '<h3>' + item.title + '</h3>';
+          if (item.description) {
+            html += '<p>' + item.description + '</p>';
+          }
+          html += '</a>';
+          html += '</li>';
+        });
+        html += '</ul>';
+        resultsContainer.innerHTML = html;
+      });
+    </script>
+    
+    <style>
+      .search-box { margin: 20px 0; }
+      .search-box input {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      .search-box input:focus { border-color: #4a90d9; }
+      .search-result-list { list-style: none; padding: 0; margin: 20px 0; }
+      .search-result-item {
+        margin-bottom: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f9f9f9;
+        transition: background 0.3s;
+      }
+      .search-result-item:hover { background: #f0f0f0; }
+      .search-result-item a { text-decoration: none; color: inherit; }
+      .search-result-item h3 { margin: 0 0 8px; color: #333; }
+      .search-result-item p { margin: 0; color: #666; font-size: 14px; }
+      .no-results { text-align: center; color: #999; padding: 20px; }
+    </style>
+  </div>
+</article>
+{{- end -}}

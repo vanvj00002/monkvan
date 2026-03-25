@@ -37,6 +37,9 @@ enableGitInfo = true
   [params.search]
     enable = true
     type = "fuse"
+    placeholder = "搜索..."
+    maxResultLength = 20
+    contentLength = 5000
 
 [menu]
   [[menu.main]]
