@@ -5,6 +5,7 @@ theme = ["fixit"]
 
 defaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
+mainSections = ["posts"]
 enableEmoji = true
 enableRobotsTXT = true
 enableGitInfo = true
@@ -22,6 +23,8 @@ enableGitInfo = true
     paginate = 12
     dateFormat = "2006-01-02"
     readMore = true
+    
+
   
   [params.page]
     hiddenFromHomePage = false
