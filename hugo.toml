@@ -13,6 +13,8 @@ enableGitInfo = true
   version = "0.3.X"
   since = 2025
   description = "老梵的个人随笔和思考"
+  [params.author]
+    name = "老梵"
   
   [params.home]
     sort = "date"
