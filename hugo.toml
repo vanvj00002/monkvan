@@ -1,26 +1,46 @@
 baseURL = 'https://vanvj00002.github.io/monkvan/'
-languageCode = 'zh-cn'
+languageCode = 'zh-CN'
 title = 'monkvan'
-theme = 'ananke'
+theme = ["fixit"]
+
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true
+enableEmoji = true
+enableRobotsTXT = true
+enableGitInfo = true
 
 [params]
-description = '老梵的个人随笔和思考'
-author = '老梵'
-showVisitedLinks = true
-showReadingTime = true
-summaryLength = 200
+  version = "0.3.X"
+  since = 2025
+  description = "老梵的个人随笔和思考"
+  
+  [params.author]
+    name = "老梵"
+  
+  [params.home]
+    sort = "date"
+    paginate = 12
+    dateFormat = "2006-01-02"
+    readMore = true
+  
+  [params.page]
+    hiddenFromHomePage = false
+    enableToC = true
+    enableLastmod = true
 
-[[menu.main]]
-name = "首页"
-url = "/"
-weight = 1
-
-[[menu.main]]
-name = "归档"
-url = "/archives/"
-weight = 2
-
-[[menu.main]]
-name = "关于"
-url = "/about/"
-weight = 3
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 2
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 3
