@@ -30,6 +30,9 @@ enableGitInfo = true
     hiddenFromHomePage = false
     enableToC = true
     enableLastmod = true
+    
+  [params.archives]
+    dateFormat = "01-02"
 
 [menu]
   [[menu.main]]
