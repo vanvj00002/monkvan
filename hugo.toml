@@ -33,6 +33,10 @@ enableGitInfo = true
     
   [params.archives]
     dateFormat = "01-02"
+    
+  [params.search]
+    enable = true
+    type = "fuse"
 
 [menu]
   [[menu.main]]
@@ -46,7 +50,17 @@ enableGitInfo = true
     url = "/archives/"
     weight = 2
   [[menu.main]]
+    identifier = "index"
+    name = "索引"
+    url = "/index/"
+    weight = 3
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 4
+  [[menu.main]]
     identifier = "about"
     name = "关于"
     url = "/about/"
-    weight = 3
+    weight = 5
